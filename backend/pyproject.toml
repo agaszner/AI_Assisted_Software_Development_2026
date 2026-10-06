@@ -1,0 +1,53 @@
+[project]
+name = "saverai-backend"
+version = "0.1.0"
+description = "SaverAI backend: rule engine, simulated bank, plans API"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "django>=5.2,<6",
+  "django-ninja>=1.4,<2",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8",
+  "pytest-django>=4.9",
+  "hypothesis>=6.100",
+  "ruff>=0.6",
+  "mypy>=1.11",
+  "django-stubs[compatible-mypy]>=5.1",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings"
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+extend-exclude = ["*/migrations/*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "DTZ"]
+
+[tool.ruff.lint.per-file-ignores]
+"core/clock.py" = ["DTZ"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+plugins = ["mypy_django_plugin.main"]
+exclude = ["/migrations/"]
+
+[tool.django-stubs]
+django_settings_module = "config.settings"
+
+# Django's ModelAdmin is not subscriptable at runtime, so admin modules use the bare class.
+[[tool.mypy.overrides]]
+module = ["banking.admin", "plans.admin"]
+disallow_any_generics = false

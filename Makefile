@@ -1,0 +1,26 @@
+# SaverAI commands (AGENTS.md section 4). Frontend targets are added by the frontend plan.
+-include .env
+export
+
+.PHONY: setup migrate dev test lint fmt check
+
+setup:
+	test -f .env || cp .env.example .env
+	cd backend && uv sync
+
+migrate:
+	cd backend && uv run python manage.py migrate
+
+dev:
+	cd backend && uv run python manage.py runserver 8000
+
+test:
+	cd backend && uv run pytest
+
+lint:
+	cd backend && uv run ruff check . && uv run ruff format --check . && uv run mypy .
+
+fmt:
+	cd backend && uv run ruff check --fix . && uv run ruff format .
+
+check: lint test

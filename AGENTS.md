@@ -51,11 +51,14 @@ make test         # all backend tests (pytest)
 make test-fe      # frontend tests (vitest)
 make e2e          # Playwright end-to-end tests (needs `make dev` running)
 make lint         # ruff, mypy, eslint
+make fmt          # auto-fix ruff lint and formatting
 make docs-check   # verify traceability and changelog (see section 8.6)
 make check        # lint + test + docs-check — run this before every commit
 ```
 
 Docker alternative: `docker compose up --build`.
+
+Environment variables (`.env.example`): `DJANGO_SECRET_KEY`, `DJANGO_DEBUG`, `SAVERAI_FIXED_DATE` (freeze today's date for demos), `SEED_PASSWORD` (demo user password).
 
 ## 5. Repository layout
 
