@@ -24,7 +24,7 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [X] `core/clock.py`: `Clock` protocol, system clock, fixed clock for tests.
 - [X] `rules/money.py`: `Huf = int`, single rounding rule.
 - [X] `rules/defaults.py`: 70 %, 3 months, 6 months, 12 months, 100,000 HUF.
-- [ ] `rules/surplus.py`: monthly surplus per calendar month, ignore own-account transfers, median of last 6 months, 70 % monthly amount. **AC1, AC5**
+- [X] `rules/surplus.py`: monthly surplus per calendar month, ignore own-account transfers, median of last 6 months, 70 % monthly amount. **AC1, AC5**
 - [ ] `rules/confidence.py`: < 3 months = no estimate; 3–5 months = low confidence + per-transfer approval. **AC6**
 - [ ] `rules/plan.py`: priority emergency fund (3× median expenses) → planned expenses → long-term investment; ≤ 12 months = low-risk liquid only; no product above customer risk score. **AC2, AC3**
 - [ ] `rules/backtest.py`: replay plan on 12 months of transactions, flag months where the transfer would break the 100,000 HUF minimum. **AC4** (dual-implementation feature, see M3)
@@ -53,7 +53,7 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [ ] Empty/explanation states: no surplus (AC5), too little data asks for expected monthly savings (AC6).
 
 ### Tests (names `test_acN_<behaviour>`)
-- [ ] AC1 normal: `test_ac1_median_surplus_gives_73500`.
+- [X] AC1 normal: `test_ac1_median_surplus_gives_73500`.
 - [ ] AC2 normal: emergency fund comes first.
 - [ ] AC3 edge: 10-month expense → liquid low-risk only; risk score 2 → nothing above 2.
 - [ ] AC4 edge: skipped month flagged when balance would drop below 100,000 HUF.

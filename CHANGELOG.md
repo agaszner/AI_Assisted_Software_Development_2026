@@ -11,3 +11,5 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - ADR-0002 records rule interpretations for spec-silent edge cases and the M2 scope.
 - Injected `Clock` (`core/clock.py`), integer-forint money helpers, calendar-month helpers and default rule parameters (`rules/defaults.py`).
 - Purity test: `rules/` may not import Django or read the system clock (golden rule 4).
+- Monthly surplus analysis: median of the last 6 complete months, 70 % suggested amount, no amount without surplus (AC1, AC5, ADR-0002).
+- Deterministic synthetic transaction generator (`banking/synthetic.py`).

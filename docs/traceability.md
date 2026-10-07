@@ -6,7 +6,7 @@ a row and that every test referenced by a non-planned row exists.
 
 | AC | Requirement (short) | Verification | Test / evidence | Status |
 | --- | --- | --- | --- | --- |
-| AC1 | Median surplus → 70 % monthly amount (73,500) | automated | tests/rules/test_surplus.py::test_ac1_median_surplus_gives_73500 | planned |
+| AC1 | Median surplus → 70 % monthly amount (73,500) | automated | tests/rules/test_surplus.py::test_ac1_median_surplus_gives_73500 | passing |
 | AC2 | Emergency fund filled before any investment | automated | tests/rules/test_plan.py::test_ac2_emergency_fund_comes_first | planned |
 | AC3 | ≤ 12-month money only liquid low-risk; nothing above risk score | automated | tests/rules/test_plan.py::test_ac3_expense_in_10_months_goes_to_liquid_low_risk; tests/rules/test_plan.py::test_ac3_risk_score_2_has_no_product_above_2 | planned |
 | AC4 | Time machine replays 12 months, flags skipped months | automated | tests/rules/test_backtest.py::test_ac4_replays_twelve_months; tests/rules/test_backtest.py::test_ac4_month_breaking_minimum_is_flagged_skipped | planned |
