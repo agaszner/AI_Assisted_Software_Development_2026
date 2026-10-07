@@ -13,17 +13,17 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 
 ### Project skeleton
 - [ ] `Makefile` with targets from AGENTS.md section 4 (`setup`, `migrate`, `seed`, `dev`, `test`, `test-fe`, `e2e`, `lint`, `docs-check`, `check`).
-- [ ] `.env.example`; keep `.env` in `.gitignore`.
-- [ ] Django 5 + Django Ninja project in `backend/` (`config/`, `core/`, `banking/`, `plans/`, `api/`).
+- [X] `.env.example`; keep `.env` in `.gitignore`.
+- [X] Django 5 + Django Ninja project in `backend/` (`config/`, `core/`, `banking/`, `plans/`, `api/`).
 - [ ] React + TypeScript (strict) + Vite + Tailwind in `frontend/`.
 - [ ] Tooling config: ruff, mypy, pytest, pytest-django, Hypothesis, eslint, prettier, Vitest.
 - [ ] `docker-compose.yml` (optional; Makefile is enough for the defence).
-- [ ] ADR-0001: tech stack choice (`docs/decisions/0001-tech-stack.md`).
+- [X] ADR-0001: tech stack choice (`docs/decisions/0001-tech-stack.md`).
 
 ### Core (`backend/core/`, `backend/rules/` — pure, no Django)
-- [ ] `core/clock.py`: `Clock` protocol, system clock, fixed clock for tests.
-- [ ] `rules/money.py`: `Huf = int`, single rounding rule.
-- [ ] `rules/defaults.py`: 70 %, 3 months, 6 months, 12 months, 100,000 HUF.
+- [X] `core/clock.py`: `Clock` protocol, system clock, fixed clock for tests.
+- [X] `rules/money.py`: `Huf = int`, single rounding rule.
+- [X] `rules/defaults.py`: 70 %, 3 months, 6 months, 12 months, 100,000 HUF.
 - [ ] `rules/surplus.py`: monthly surplus per calendar month, ignore own-account transfers, median of last 6 months, 70 % monthly amount. **AC1, AC5**
 - [ ] `rules/confidence.py`: < 3 months = no estimate; 3–5 months = low confidence + per-transfer approval. **AC6**
 - [ ] `rules/plan.py`: priority emergency fund (3× median expenses) → planned expenses → long-term investment; ≤ 12 months = low-risk liquid only; no product above customer risk score. **AC2, AC3**
@@ -41,7 +41,7 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [ ] Synthetic data generator + `make seed`: personas covering AC1 (the 100k/120k/80k/110k/90k/300k series), AC2 (no emergency fund), AC5 (negative surplus), AC6 (2 months and 4 months of data).
 
 ### API (`backend/api/`)
-- [ ] Auth: login/logout, roles `customer` and `admin`.
+- [X] Auth: login/logout, roles `customer` and `admin`.
 - [ ] Endpoints: questionnaire submit, spending analysis, plan proposal, time machine, accept / reject / edit amount, pause, active plan.
 - [ ] Ninja schemas validate input: negative amount and past expense date return 422. **AC8**
 - [ ] Ownership check: another customer's plan returns 403 on view and accept. **AC8**
@@ -66,11 +66,11 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 
 ### Documentation
 - [ ] `README.md`: setup, run, test commands, link to `docs/ai-usage.md`.
-- [ ] `docs/traceability.md`: one row per AC, verification method, test path, status.
+- [X] `docs/traceability.md`: one row per AC, verification method, test path, status.
 - [ ] `docs/manual-checks.md`: reproducible steps for UI-only checks.
 - [ ] `docs/architecture.md`: components and data model.
-- [ ] `CHANGELOG.md` (Keep a Changelog).
-- [ ] `make docs-check` script (AC ↔ traceability, referenced tests exist, changelog touched).
+- [X] `CHANGELOG.md` (Keep a Changelog).
+- [X] `make docs-check` script (AC ↔ traceability, referenced tests exist, changelog touched).
 - [ ] AI usage Case 2 (design or implementation phase) and Case 3 (testing phase).
 - [ ] Tag `v1.0-first-version`, push, submit.
 

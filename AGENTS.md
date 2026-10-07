@@ -132,6 +132,7 @@ Documentation is updated **in the same commit** as the code it describes. An age
 | Used AI for a substantive decision | `docs/ai-usage.md` (section 8.4) |
 | Data model / migration | `docs/architecture.md` (data model section) |
 | Change-request work | `docs/change-request.md` |
+| Finished an item listed in `docs/tasks.md` | tick it (`- [X]`) in `docs/tasks.md` |
 
 ### 8.2 `docs/traceability.md`
 
@@ -190,7 +191,7 @@ Follow *Keep a Changelog*. Sections: Added, Changed, Fixed, Removed. Reference A
 2. State a short plan: files to touch, tests to add, docs to update. Wait for approval if the task changes a requirement, the data model or adds a dependency.
 3. Write or update the test first where practical, then the code.
 4. Run `make check`. Do not finish with failing checks.
-5. Update documentation (section 8).
+5. Update documentation (section 8), and tick every finished item in `docs/tasks.md`.
 6. Commit with Conventional Commits: `feat(rules): flag skipped months in backtest (AC4)`.
 7. End with a summary: what changed, which ACs are affected, test results, docs updated, open questions.
 
