@@ -13,3 +13,4 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Purity test: `rules/` may not import Django or read the system clock (golden rule 4).
 - Monthly surplus analysis: median of the last 6 complete months, 70 % suggested amount, no amount without surplus (AC1, AC5, ADR-0002).
 - Deterministic synthetic transaction generator (`banking/synthetic.py`).
+- Confidence level: no estimate under 3 months, low confidence for 3–5 months (AC6).

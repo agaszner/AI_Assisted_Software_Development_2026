@@ -25,7 +25,7 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [X] `rules/money.py`: `Huf = int`, single rounding rule.
 - [X] `rules/defaults.py`: 70 %, 3 months, 6 months, 12 months, 100,000 HUF.
 - [X] `rules/surplus.py`: monthly surplus per calendar month, ignore own-account transfers, median of last 6 months, 70 % monthly amount. **AC1, AC5**
-- [ ] `rules/confidence.py`: < 3 months = no estimate; 3–5 months = low confidence + per-transfer approval. **AC6**
+- [X] `rules/confidence.py`: < 3 months = no estimate; 3–5 months = low confidence + per-transfer approval. **AC6**
 - [ ] `rules/plan.py`: priority emergency fund (3× median expenses) → planned expenses → long-term investment; ≤ 12 months = low-risk liquid only; no product above customer risk score. **AC2, AC3**
 - [ ] `rules/backtest.py`: replay plan on 12 months of transactions, flag months where the transfer would break the 100,000 HUF minimum. **AC4** (dual-implementation feature, see M3)
 - [ ] `rules/mandate.py`: mandate schema + `check_action()` returning allowed/denied with version and clause.
@@ -58,7 +58,7 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [ ] AC3 edge: 10-month expense → liquid low-risk only; risk score 2 → nothing above 2.
 - [ ] AC4 edge: skipped month flagged when balance would drop below 100,000 HUF.
 - [ ] AC5 edge: negative median → no plan + message.
-- [ ] AC6 edge: 2 months → no estimate; 4 months → low confidence.
+- [X] AC6 edge: 2 months → no estimate; 4 months → low confidence.
 - [ ] AC7 regression-style: accept twice → one set of orders; reject → none.
 - [ ] AC8 invalid + unauthorised: 422 cases, 403 case.
 - [ ] Hypothesis property: balance never below mandate minimum for any transaction sequence.
