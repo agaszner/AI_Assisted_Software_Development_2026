@@ -1,5 +1,5 @@
 # 0001. Backend tech stack and dependencies
-Date: 2026-10-06 · Status: proposed
+Date: 2026-10-06 · Status: accepted
 
 ## Context
 SaverAI needs a small, testable backend for a university homework: a pure rule engine, a few

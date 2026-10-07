@@ -2,7 +2,7 @@
 -include .env
 export
 
-.PHONY: setup migrate dev test lint fmt check
+.PHONY: setup migrate dev test lint fmt docs-check check
 
 setup:
 	test -f .env || cp .env.example .env
@@ -23,4 +23,7 @@ lint:
 fmt:
 	cd backend && uv run ruff check --fix . && uv run ruff format .
 
-check: lint test
+docs-check:
+	python3 scripts/docs_check.py
+
+check: lint test docs-check
