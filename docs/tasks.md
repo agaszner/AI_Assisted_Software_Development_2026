@@ -35,9 +35,9 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [X] `plans` models: QuestionnaireAnswer, Plan (status: proposed / accepted / rejected / paused), PlanItem, Mandate (versioned), Execution (idempotency key, unique constraint), LogEntry.
 - [X] `RuleConfig` model with defaults from `rules/defaults.py`, editable in Django admin.
 - [X] Django admin for products and `RuleConfig` (Admin role).
-- [ ] Plan acceptance service: creates recurring orders exactly once; rejected plan creates none. **AC7**
+- [X] Plan acceptance service: creates recurring orders exactly once; rejected plan creates none. **AC7**
 - [ ] Order execution service: every execution passes `check_action()`; log records mandate version and clause.
-- [ ] `plans/explanations.py`: fixed templates filled only from rule results (no surplus, too little data, low confidence, skipped month).
+- [X] `plans/explanations.py`: fixed templates filled only from rule results (no surplus, too little data, low confidence, skipped month).
 - [X] Synthetic data generator + `make seed`: personas covering AC1 (the 100k/120k/80k/110k/90k/300k series), AC2 (no emergency fund), AC5 (negative surplus), AC6 (2 months and 4 months of data).
 
 ### API (`backend/api/`)
