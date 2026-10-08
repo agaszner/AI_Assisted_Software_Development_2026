@@ -57,3 +57,39 @@ How AI tools are used to **develop** SaverAI. The running application contains n
   - Added what the suggestion left out: `rules.mandate.check_action()` before every execution, with
     the mandate version and clause logged (golden rule 6), and an ownership check returning 403 for
     another customer's plan instead of the 404 that `.get(customer=user)` would give (AC8).
+
+### Case 3 — UI target: mobile first rejected, responsive web chosen (DRAFT — author to verify)
+- Phase: design
+- Tool and model: Opus 5.5 the tool and model that suggested mobile first. The web redesign was
+  made with Claude Opus 5.5 and the Figma MCP server.
+- Problem: the specification described a "React mobile banking UI". The first Figma design
+  (https://www.figma.com/design/BqX09Awt7irGNkgUDShfsa) targeted 1440 px desktop web with a six-item top
+  navigation. The UI target had to be fixed before the React frontend is built. UI did not look modern.
+- Context given and key instruction: `docs/specification.md`, `AGENTS.md`, `backend/plans/explanations.py`,
+  the seed personas and a review of the first design.
+- Essence of the AI suggestion: design the UI mobile first: phone-sized screens, a bottom `TabBar` and
+  slide-up sheets for confirmations, in line with the "mobile banking UI" wording of the specification.
+- Decision: **rejected; responsive web chosen.**
+  Reasons (author to verify and complete):
+  - The app is demonstrated and tested in a desktop browser (`make dev`, Playwright e2e).
+  - The wide screen keeps the decision visible. On Plan review and Mandate, a summary panel stays in
+    place on the right while scrolling: amount, confidence badge, time machine summary and the single
+    main button.
+  - Web-banking patterns fit the content better: a left sidebar (Home · Savings plan · Activity ·
+    Profile) as on Wise and Revolut web, a focused checkout-style plan flow (Step N of 4, Back,
+    Save & exit), a centered "Confirm with password" modal (simulated strong customer authentication)
+    and the execution log as a table with an expandable audit row.
+  - Small screens are still covered: there is no separate mobile design, but the two-column screens
+    stack at about 768 px and 375 px, and the 44 px minimum target is kept.
+  - The new web was better for UX.
+- Verification: new file https://www.figma.com/design/QUT5rnXj1U6BYjty7YH5uS. . Texts come from
+  `backend/plans/explanations.py` and the `InvalidInput` messages in `backend/plans/services.py`. The plan
+  amounts (73,500 HUF split 30,000 / 30,000 / 13,500; 40,250 HUF for dani; -40,000 HUF for bence; 2 months
+  for csilla) were produced by running `rules.plan.propose` on the seed personas with today 2026-10-08 and
+  risk score 2; for anna also an existing emergency fund of 720,000 HUF and a planned expense "New laptop",
+  300,000 HUF, due 2027-08-01. `docs/specification.md`,
+  `docs/SaverAI_BIA823.docx`, `AGENTS.md` section 5 and `docs/tasks.md` were updated to match.
+- Limitations of this verification: visual review only, no usability test. The time machine figures
+  (735,000 HUF, 2 skipped months over 12 months) are an illustrative 12-month scenario. Seed persona anna
+  has only 6 months of data, for which the engine gives 441,000 HUF and no skipped month. Order IDs in
+  idempotency keys are illustrative. The sticky summary panel is annotated in the file, not prototyped.

@@ -6,7 +6,7 @@ Gaszner Ádám László, BIA823
 
 SaverAI is a savings assistant for bank customers. The customer fills in a short questionnaire (goals, risk tolerance, planned large expenses), the app analyses past transactions to estimate the typical monthly surplus, recommends a savings and investment plan matching the answers and, once accepted, sets up recurring orders automatically. Before acceptance, a financial time machine replays the plan on the customer's last 12 months of real transactions, every plan shows a confidence level, and orders run only under a signed, versioned mandate of limits.
 
-The application contains no AI service: all amounts, product choices, limits and explanations come from a deterministic rule engine, explanations are fixed templates filled with its results. Backend: Python/Django (rule engine, users, plans, simulated bank data). Frontend: React mobile banking UI (home, questionnaire, plan review, time machine, mandate, active plan). Transactions, products and order execution are simulated.
+The application contains no AI service: all amounts, product choices, limits and explanations come from a deterministic rule engine, explanations are fixed templates filled with its results. Backend: Python/Django (rule engine, users, plans, simulated bank data). Frontend: React web banking UI (responsive): home, questionnaire, plan review, time machine, mandate, active plan. Transactions, products and order execution are simulated.
 
 ## Roles and main scenarios
 

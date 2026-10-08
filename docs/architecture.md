@@ -32,3 +32,20 @@ All money fields are `BigIntegerField` (whole forints). Timestamps come from the
 ## Main flow
 questionnaire → `propose_plan` (rule engine) → plan review + time machine → accept (mandate vN,
 recurring orders) → `manage.py run_orders` each month → `check_action` → execution + log entry.
+
+## UI design
+Figma file: https://www.figma.com/design/QUT5rnXj1U6BYjty7YH5uS (responsive web: 1440 px desktop frames,
+375 px checks for Home and Plan review). The earlier top-navigation version,
+https://www.figma.com/design/BqX09Awt7irGNkgUDShfsa, is kept for reference (AI usage case 3).
+- Navigation: left sidebar `SideNav` (Home · Savings plan · Activity · Profile). The plan flow
+  (questionnaire, spending analysis, plan review with its time machine sub-view, mandate) hides the
+  sidebar and uses `FlowHeader` (Step N of 4, Back, Save & exit).
+- Screens `01 Login` … `10 Too little data`, plus `05b`, `07b` and the 375 px frames, map to
+  `frontend/src/screens/`. The `Components` board holds Icon/*, Button, Badge, Checkbox, RiskOption,
+  Input, Tooltip, NavItem, SideNav, FlowHeader, StatTile, TransactionRow, PlanItem, LogRow and
+  SummaryPanel, with hover and focus states for the interactive ones.
+- Local variables (`color`, `space` collections), text styles and effect styles (`Focus/Ring`,
+  `Elevation/*`) are the source for `frontend/src/theme/` tokens.
+- Customer-facing texts are copied from `backend/plans/explanations.py` and the validation messages in
+  `backend/plans/services.py`. Breakpoints and keyboard behaviour are on the
+  `Responsive & interaction notes` frame.

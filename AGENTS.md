@@ -86,7 +86,7 @@ backend/
     defects/           faulty vs fixed versions (homework requirement, do not "fix")
 frontend/
   src/screens/       one folder per screen (matches Figma 01–10)
-  src/components/    shared UI (Button, TransactionRow, TabBar)
+  src/components/    shared UI (Button, TransactionRow, SideNav)
   src/theme/         design tokens exported from Figma variables
 docs/                see section 8
 AGENTS.md            this file (CLAUDE.md and GEMINI.md are symlinks to it)

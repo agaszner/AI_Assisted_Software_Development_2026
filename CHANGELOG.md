@@ -24,3 +24,6 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `make seed`: product catalogue, admin user and personas for AC1, AC2, AC5 and AC6.
 - Fixed explanation templates filled from rule results (`plans/explanations.py`).
 - Plan services: questionnaire with past-date check (AC8), proposal (AC5, AC6), acceptance with versioned mandate and exactly-once recurring orders, rejection (AC7), amount edit, pause, ownership check (AC8).
+
+### Changed
+- Frontend target is a responsive web UI instead of a mobile UI: left sidebar, focused plan flow, sticky summary panel, password-confirmation modal, execution log table; new Figma file (AI usage case 3).
