@@ -12,6 +12,10 @@ for how AI tools were used during development.
     make migrate    # create the SQLite database
     make dev        # backend on http://localhost:8000 (admin: /admin/, API docs: /api/docs)
 
+## Run with Docker
+    make setup                  # only to create .env (or: cp .env.example .env)
+    docker compose up --build   # backend on http://localhost:8000, applies migrations on start
+
 ## Quality
     make test       # pytest
     make lint       # ruff + mypy
