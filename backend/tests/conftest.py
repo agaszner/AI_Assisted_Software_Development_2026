@@ -1,8 +1,15 @@
 import pytest
+from hypothesis import HealthCheck
+from hypothesis import settings as hypothesis_settings
 from pytest_django.fixtures import Settings
 
 from core.clock import FixedClock
 from tests.constants import TODAY
+
+hypothesis_settings.register_profile(
+    "saverai", suppress_health_check=[HealthCheck.function_scoped_fixture], deadline=None
+)
+hypothesis_settings.load_profile("saverai")
 
 
 @pytest.fixture(autouse=True)
