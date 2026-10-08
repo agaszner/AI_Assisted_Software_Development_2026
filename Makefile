@@ -2,7 +2,7 @@
 -include .env
 export
 
-.PHONY: setup migrate dev test lint fmt docs-check check
+.PHONY: setup migrate seed dev test lint fmt docs-check check
 
 setup:
 	test -f .env || cp .env.example .env
@@ -10,6 +10,9 @@ setup:
 
 migrate:
 	cd backend && uv run python manage.py migrate
+
+seed: migrate
+	cd backend && uv run python manage.py seed
 
 dev:
 	cd backend && uv run python manage.py runserver 8000

@@ -10,7 +10,17 @@ for how AI tools were used during development.
 ## Setup and run
     make setup      # install backend deps, create .env from .env.example
     make migrate    # create the SQLite database
+    make seed       # products, admin user and demo personas (password: SEED_PASSWORD in .env)
     make dev        # backend on http://localhost:8000 (admin: /admin/, API docs: /api/docs)
+
+## Demo personas (`make seed`)
+| User | Data | Shows |
+| --- | --- | --- |
+| anna | 6 months, surpluses 100k/120k/80k/110k/90k/300k | AC1 (73,500 HUF), AC2 when no emergency fund is entered |
+| bence | 6 months, −40k each | AC5 no surplus |
+| csilla | 2 months | AC6 asks for expected savings |
+| dani | 4 months | AC6 low confidence, per-transfer approval |
+| admin | staff user | Django admin: products, rule parameters |
 
 ## Run with Docker
     make setup                  # only to create .env (or: cp .env.example .env)

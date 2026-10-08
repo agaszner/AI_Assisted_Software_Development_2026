@@ -21,3 +21,4 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Mandate check `check_action()` with numbered clauses (§1 products and monthly maximum, §2 minimum balance, §3 per-transfer approval, §4 pause); Hypothesis property test.
 - Data model: accounts, transactions, products, rule configuration, questionnaire, plans, mandates, recurring orders, executions, audit log (see `docs/architecture.md`).
 - Django admin for the product catalogue and rule parameters (Admin role).
+- `make seed`: product catalogue, admin user and personas for AC1, AC2, AC5 and AC6.
