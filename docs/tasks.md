@@ -31,10 +31,10 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [X] `rules/mandate.py`: mandate schema + `check_action()` returning allowed/denied with version and clause.
 
 ### Data model and services
-- [ ] `banking` models: Account, Transaction, Product (risk 1–5, minimum horizon, liquid flag), Order.
-- [ ] `plans` models: QuestionnaireAnswer, Plan (status: proposed / accepted / rejected / paused), PlanItem, Mandate (versioned), Execution (idempotency key, unique constraint), LogEntry.
-- [ ] `RuleConfig` model with defaults from `rules/defaults.py`, editable in Django admin.
-- [ ] Django admin for products and `RuleConfig` (Admin role).
+- [X] `banking` models: Account, Transaction, Product (risk 1–5, minimum horizon, liquid flag), Order.
+- [X] `plans` models: QuestionnaireAnswer, Plan (status: proposed / accepted / rejected / paused), PlanItem, Mandate (versioned), Execution (idempotency key, unique constraint), LogEntry.
+- [X] `RuleConfig` model with defaults from `rules/defaults.py`, editable in Django admin.
+- [X] Django admin for products and `RuleConfig` (Admin role).
 - [ ] Plan acceptance service: creates recurring orders exactly once; rejected plan creates none. **AC7**
 - [ ] Order execution service: every execution passes `check_action()`; log records mandate version and clause.
 - [ ] `plans/explanations.py`: fixed templates filled only from rule results (no surplus, too little data, low confidence, skipped month).
@@ -68,7 +68,7 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [ ] `README.md`: setup, run, test commands, link to `docs/ai-usage.md`.
 - [X] `docs/traceability.md`: one row per AC, verification method, test path, status.
 - [ ] `docs/manual-checks.md`: reproducible steps for UI-only checks.
-- [ ] `docs/architecture.md`: components and data model.
+- [X] `docs/architecture.md`: components and data model.
 - [X] `CHANGELOG.md` (Keep a Changelog).
 - [X] `make docs-check` script (AC ↔ traceability, referenced tests exist, changelog touched).
 - [ ] AI usage Case 2 (design or implementation phase) and Case 3 (testing phase).
