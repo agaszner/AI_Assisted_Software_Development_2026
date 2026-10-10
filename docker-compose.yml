@@ -1,0 +1,9 @@
+# Backend only for now; the frontend service is added by the frontend plan.
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    env_file: .env
+    volumes:
+      - ./backend:/app  # live code reload; SQLite stays in backend/db.sqlite3

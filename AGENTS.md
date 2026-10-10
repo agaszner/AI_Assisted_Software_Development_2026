@@ -51,11 +51,16 @@ make test         # all backend tests (pytest)
 make test-fe      # frontend tests (vitest)
 make e2e          # Playwright end-to-end tests (needs `make dev` running)
 make lint         # ruff, mypy, eslint
+make fmt          # auto-fix ruff lint and formatting
 make docs-check   # verify traceability and changelog (see section 8.6)
 make check        # lint + test + docs-check — run this before every commit
 ```
 
+Monthly orders: `cd backend && uv run python manage.py run_orders [--period YYYY-MM]` (idempotent; APScheduler deferred, ADR-0002).
+
 Docker alternative: `docker compose up --build`.
+
+Environment variables (`.env.example`): `DJANGO_SECRET_KEY`, `DJANGO_DEBUG`, `SAVERAI_FIXED_DATE` (freeze today's date for demos), `SEED_PASSWORD` (demo user password).
 
 ## 5. Repository layout
 
@@ -83,7 +88,7 @@ backend/
     defects/           faulty vs fixed versions (homework requirement, do not "fix")
 frontend/
   src/screens/       one folder per screen (matches Figma 01–10)
-  src/components/    shared UI (Button, TransactionRow, TabBar)
+  src/components/    shared UI (Button, TransactionRow, SideNav)
   src/theme/         design tokens exported from Figma variables
 docs/                see section 8
 AGENTS.md            this file (CLAUDE.md and GEMINI.md are symlinks to it)
@@ -129,6 +134,7 @@ Documentation is updated **in the same commit** as the code it describes. An age
 | Used AI for a substantive decision | `docs/ai-usage.md` (section 8.4) |
 | Data model / migration | `docs/architecture.md` (data model section) |
 | Change-request work | `docs/change-request.md` |
+| Finished an item listed in `docs/tasks.md` | tick it (`- [X]`) in `docs/tasks.md` |
 
 ### 8.2 `docs/traceability.md`
 
@@ -187,7 +193,7 @@ Follow *Keep a Changelog*. Sections: Added, Changed, Fixed, Removed. Reference A
 2. State a short plan: files to touch, tests to add, docs to update. Wait for approval if the task changes a requirement, the data model or adds a dependency.
 3. Write or update the test first where practical, then the code.
 4. Run `make check`. Do not finish with failing checks.
-5. Update documentation (section 8).
+5. Update documentation (section 8), and tick every finished item in `docs/tasks.md`.
 6. Commit with Conventional Commits: `feat(rules): flag skipped months in backtest (AC4)`.
 7. End with a summary: what changed, which ACs are affected, test results, docs updated, open questions.
 
