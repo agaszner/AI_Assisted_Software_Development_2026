@@ -25,6 +25,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Fixed explanation templates filled from rule results (`plans/explanations.py`).
 - Monthly order execution through the mandate check with an idempotency key per order and executed month (AC7); low-confidence transfers wait for customer approval (AC6); log stores mandate version and clause. `manage.py run_orders [--period YYYY-MM]`; no future month, no month before the mandate was signed (ADR-0002, AI usage Cases 2 and 4).
 - Manual checks (`docs/manual-checks.md`), AI usage working-method section and Case 4 draft.
+- Customer API: questionnaire, spending analysis, plan proposal and review, time machine, accept / reject / edit / pause, active plan, transfer approval. Strict integer money validation and past-date check return 422; another customer's plan returns 403; state conflicts return 409; CSRF enforced on session POSTs (AC5, AC6, AC8).
 - Plan services: questionnaire with past-date check (AC8), proposal (AC5, AC6), acceptance with versioned mandate and exactly-once recurring orders, rejection (AC7), amount edit, pause, ownership check (AC8).
 
 ### Changed

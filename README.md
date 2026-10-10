@@ -24,6 +24,11 @@ for how AI tools were used during development.
 | dani | 4 months | AC6 low confidence, per-transfer approval |
 | admin | staff user | Django admin: products, rule parameters |
 
+## API
+Interactive docs at http://localhost:8000/api/docs after `make dev`. Log in with
+`POST /api/auth/login`; customer endpoints: questionnaire, analysis, plans (propose, review,
+edit, accept, reject, pause, time machine), executions (list, approve).
+
 ## Run with Docker
     make setup                  # only to create .env (or: cp .env.example .env)
     docker compose up --build   # backend on http://localhost:8000, applies migrations on start

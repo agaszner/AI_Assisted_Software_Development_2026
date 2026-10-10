@@ -42,9 +42,9 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 
 ### API (`backend/api/`)
 - [X] Auth: login/logout, roles `customer` and `admin`.
-- [ ] Endpoints: questionnaire submit, spending analysis, plan proposal, time machine, accept / reject / edit amount, pause, active plan.
-- [ ] Ninja schemas validate input: negative amount and past expense date return 422. **AC8**
-- [ ] Ownership check: another customer's plan returns 403 on view and accept. **AC8**
+- [X] Endpoints: questionnaire submit, spending analysis, plan proposal, time machine, accept / reject / edit amount, pause, active plan.
+- [X] Ninja schemas validate input: negative amount and past expense date return 422. **AC8**
+- [X] Ownership check: another customer's plan returns 403 on view and accept. **AC8**
 
 ### Frontend (`frontend/src/screens/`)
 - [ ] Theme tokens in `src/theme/` (from Figma variables if available).
@@ -57,10 +57,10 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [X] AC2 normal: emergency fund comes first.
 - [X] AC3 edge: 10-month expense → liquid low-risk only; risk score 2 → nothing above 2.
 - [X] AC4 edge: skipped month flagged when balance would drop below 100,000 HUF.
-- [ ] AC5 edge: negative median → no plan + message.
+- [X] AC5 edge: negative median → no plan + message.
 - [X] AC6 edge: 2 months → no estimate; 4 months → low confidence.
 - [X] AC7 regression-style: accept twice → one set of orders; reject → none.
-- [ ] AC8 invalid + unauthorised: 422 cases, 403 case.
+- [X] AC8 invalid + unauthorised: 422 cases, 403 case.
 - [X] Hypothesis property: balance never below mandate minimum for any transaction sequence.
 - [ ] One Playwright e2e of the main workflow (questionnaire → plan → time machine → accept).
 

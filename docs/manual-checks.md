@@ -1,8 +1,9 @@
 # Manual checks
 
 Reproducible checks for behaviour that is easiest to see in the running app.
-The customer API arrives with backend plan Task 13 and the UI with the frontend plan, so until then
-the checks use Django admin and `manage.py shell`. They will be rewritten against the API and UI.
+The checks use Django admin and `manage.py shell` so that each step is one copy-paste; the same
+data is available through the API (http://localhost:8000/api/docs). They will be rewritten
+against the UI once the frontend exists.
 
 Setup for every check (from a clean database, so the numbers match). Set
 `SAVERAI_FIXED_DATE=2026-10-06` in `.env` first: `make seed` dates its personas from that day, and
