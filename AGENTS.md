@@ -56,6 +56,8 @@ make docs-check   # verify traceability and changelog (see section 8.6)
 make check        # lint + test + docs-check — run this before every commit
 ```
 
+Monthly orders: `cd backend && uv run python manage.py run_orders [--period YYYY-MM]` (idempotent; APScheduler deferred, ADR-0002).
+
 Docker alternative: `docker compose up --build`.
 
 Environment variables (`.env.example`): `DJANGO_SECRET_KEY`, `DJANGO_DEBUG`, `SAVERAI_FIXED_DATE` (freeze today's date for demos), `SEED_PASSWORD` (demo user password).
