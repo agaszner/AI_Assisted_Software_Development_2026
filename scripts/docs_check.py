@@ -5,6 +5,7 @@ Fails when:
 - an AC in docs/specification.md has no row in docs/traceability.md;
 - a row whose status is not "planned" references a test that does not exist
   (paths are relative to backend/);
+- frontend references (frontend/...test.tsx::title) must name an existing file and test title.
 - files under backend/ or frontend/src/ have uncommitted changes but CHANGELOG.md has none.
 
 Limitation: the CHANGELOG rule only sees uncommitted changes, so it checks the change
@@ -19,6 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 BACKEND = ROOT / "backend"
 TEST_REF = re.compile(r"tests/[\w/]+\.py(?:::\w+)?")
+FRONTEND_REF = re.compile(r"frontend/[\w/.-]+\.(?:test|spec)\.tsx?(?:::\w+)?")
 
 
 def spec_acs() -> set[str]:
@@ -36,12 +38,20 @@ def traceability_rows() -> list[tuple[str, str, str]]:
 
 
 def test_reference_exists(ref: str) -> bool:
+    """Backend refs are relative to backend/ and name a `def`; frontend refs are relative to the
+    repository root and name a quoted Vitest / Playwright test title."""
     path, _, name = ref.partition("::")
-    file = BACKEND / path
+    in_frontend = path.startswith("frontend/")
+    file = (ROOT if in_frontend else BACKEND) / path
     if not file.is_file():
         return False
-    pattern = rf"^\s*def {re.escape(name)}\("
-    return not name or re.search(pattern, file.read_text(), re.MULTILINE) is not None
+    if not name:
+        return True
+    if in_frontend:
+        pattern = rf"""["']{re.escape(name)}["']"""
+    else:
+        pattern = rf"^\s*def {re.escape(name)}\("
+    return re.search(pattern, file.read_text(), re.MULTILINE) is not None
 
 
 def changed_paths() -> set[str]:
@@ -63,7 +73,7 @@ def main() -> int:
     for ac, evidence, status in rows:
         if status == "planned":
             continue
-        for ref in TEST_REF.findall(evidence):
+        for ref in TEST_REF.findall(evidence) + FRONTEND_REF.findall(evidence):
             if not test_reference_exists(ref):
                 errors.append(f"{ac}: referenced test not found: {ref}")
     changed = changed_paths()

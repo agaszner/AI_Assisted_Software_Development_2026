@@ -33,7 +33,7 @@ This is a university homework project (BME, AI Assisted Software Development). E
 | Admin | Django admin (product catalogue, rule parameters) — the "Admin" role |
 | Auth | Django auth + session/JWT via Ninja; roles: `customer`, `admin` |
 | Scheduling | APScheduler (monthly orders, year-end tax check) |
-| Frontend | React + TypeScript (strict) + Vite, Tailwind CSS, TanStack Query, Recharts |
+| Frontend | React + TypeScript (strict) + Vite, React Router, Tailwind CSS, TanStack Query, Recharts (ADR-0003) |
 | Tests | pytest, pytest-django, Hypothesis, Playwright (e2e), Vitest (frontend) |
 | Quality | ruff (lint + format), mypy, eslint, prettier |
 | Run | Docker Compose, Makefile |
@@ -49,7 +49,7 @@ make seed         # load synthetic personas, products and inflation table
 make dev          # run backend (localhost:8000) and frontend (localhost:5173)
 make test         # all backend tests (pytest)
 make test-fe      # frontend tests (vitest)
-make e2e          # Playwright end-to-end tests (needs `make dev` running)
+make e2e          # Playwright end-to-end tests (starts servers if needed; resets the local database)
 make lint         # ruff, mypy, eslint
 make fmt          # auto-fix ruff lint and formatting
 make docs-check   # verify traceability and changelog (see section 8.6)

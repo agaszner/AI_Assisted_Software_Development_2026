@@ -27,6 +27,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Manual checks (`docs/manual-checks.md`), AI usage working-method section and Case 4 draft.
 - Customer API: questionnaire, spending analysis, plan proposal and review, time machine, accept / reject / edit / pause, active plan, transfer approval. Strict integer money validation and past-date check return 422; another customer's plan returns 403; state conflicts return 409; CSRF enforced on session POSTs (AC5, AC6, AC8).
 - Plan services: questionnaire with past-date check (AC8), proposal (AC5, AC6), acceptance with versioned mandate and exactly-once recurring orders, rejection (AC7), amount edit, pause, ownership check (AC8).
+- React + TypeScript + Vite frontend skeleton with Vitest, ESLint, Prettier; `make dev` runs backend and frontend, new `make test-fe` and `make e2e` (ADR-0003).
+- `make docs-check` also verifies frontend test references in `docs/traceability.md`.
 
 ### Changed
 - Frontend target is a responsive web UI instead of a mobile UI: left sidebar, focused plan flow, sticky summary panel, password-confirmation modal, execution log table; new Figma file (AI usage case 3).

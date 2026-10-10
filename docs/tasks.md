@@ -15,8 +15,8 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [ ] `Makefile` with targets from AGENTS.md section 4 (`setup`, `migrate`, `seed`, `dev`, `test`, `test-fe`, `e2e`, `lint`, `docs-check`, `check`).
 - [X] `.env.example`; keep `.env` in `.gitignore`.
 - [X] Django 5 + Django Ninja project in `backend/` (`config/`, `core/`, `banking/`, `plans/`, `api/`).
-- [ ] React + TypeScript (strict) + Vite + Tailwind in `frontend/`.
-- [ ] Tooling config: ruff, mypy, pytest, pytest-django, Hypothesis, eslint, prettier, Vitest.
+- [X] React + TypeScript (strict) + Vite + Tailwind in `frontend/`.
+- [X] Tooling config: ruff, mypy, pytest, pytest-django, Hypothesis, eslint, prettier, Vitest.
 - [X] `docker-compose.yml` (optional; Makefile is enough for the defence).
 - [X] ADR-0001: tech stack choice (`docs/decisions/0001-tech-stack.md`).
 

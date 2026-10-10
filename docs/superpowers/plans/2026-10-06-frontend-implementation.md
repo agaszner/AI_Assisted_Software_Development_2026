@@ -1,5 +1,8 @@
 # SaverAI Frontend (M2) Implementation Plan
 
+> **Superseded** by `docs/superpowers/plans/2026-10-10-frontend-figma-implementation.md` (based on the
+> Figma file `QUT5rnXj1U6BYjty7YH5uS`). Kept for reference; do not execute.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 > **Commits:** the user asked for **no commits**. Every task ends with a *suggested* Conventional Commit message; the user runs `git commit` themselves. Do not run `git commit`, `git tag` or `git push`. If the user later says to commit, replace each "Suggested commit" step with a real commit.

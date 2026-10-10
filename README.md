@@ -6,12 +6,13 @@ for how AI tools were used during development.
 
 ## Requirements
 - Python 3.12 and [uv](https://docs.astral.sh/uv/)
+- Node.js 22 or newer (npm)
 
 ## Setup and run
-    make setup      # install backend deps, create .env from .env.example
+    make setup      # backend + frontend deps, Playwright Chromium, .env from .env.example
     make migrate    # create the SQLite database
     make seed       # products, admin user and demo personas (password: SEED_PASSWORD in .env)
-    make dev        # backend on http://localhost:8000 (admin: /admin/, API docs: /api/docs)
+    make dev        # backend on http://localhost:8000, app on http://localhost:5173
     cd backend && uv run python manage.py run_orders   # execute this month's orders (idempotent)
     cd backend && uv run python manage.py run_orders --period 2026-09   # late run for a past month
 
@@ -35,7 +36,9 @@ edit, accept, reject, pause, time machine), executions (list, approve).
 
 ## Quality
     make test       # pytest
-    make lint       # ruff + mypy
+    make test-fe    # frontend tests (Vitest)
+    make e2e        # Playwright end-to-end tests; RESETS the local database (flush, migrate, seed)
+    make lint       # ruff + mypy, eslint + tsc + prettier
     make fmt        # auto-fix lint and formatting
     make check      # run before every commit
 
