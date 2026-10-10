@@ -12,6 +12,8 @@ for how AI tools were used during development.
     make migrate    # create the SQLite database
     make seed       # products, admin user and demo personas (password: SEED_PASSWORD in .env)
     make dev        # backend on http://localhost:8000 (admin: /admin/, API docs: /api/docs)
+    cd backend && uv run python manage.py run_orders   # execute this month's orders (idempotent)
+    cd backend && uv run python manage.py run_orders --period 2026-09   # late run for a past month
 
 ## Demo personas (`make seed`)
 | User | Data | Shows |

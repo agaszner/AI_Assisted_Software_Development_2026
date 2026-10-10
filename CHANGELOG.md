@@ -23,6 +23,8 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Django admin for the product catalogue and rule parameters (Admin role).
 - `make seed`: product catalogue, admin user and personas for AC1, AC2, AC5 and AC6.
 - Fixed explanation templates filled from rule results (`plans/explanations.py`).
+- Monthly order execution through the mandate check with an idempotency key per order and executed month (AC7); low-confidence transfers wait for customer approval (AC6); log stores mandate version and clause. `manage.py run_orders [--period YYYY-MM]`; no future month, no month before the mandate was signed (ADR-0002, AI usage Cases 2 and 4).
+- Manual checks (`docs/manual-checks.md`), AI usage working-method section and Case 4 draft.
 - Plan services: questionnaire with past-date check (AC8), proposal (AC5, AC6), acceptance with versioned mandate and exactly-once recurring orders, rejection (AC7), amount edit, pause, ownership check (AC8).
 
 ### Changed

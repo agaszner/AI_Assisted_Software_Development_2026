@@ -36,7 +36,7 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [X] `RuleConfig` model with defaults from `rules/defaults.py`, editable in Django admin.
 - [X] Django admin for products and `RuleConfig` (Admin role).
 - [X] Plan acceptance service: creates recurring orders exactly once; rejected plan creates none. **AC7**
-- [ ] Order execution service: every execution passes `check_action()`; log records mandate version and clause.
+- [X] Order execution service: every execution passes `check_action()`; log records mandate version and clause.
 - [X] `plans/explanations.py`: fixed templates filled only from rule results (no surplus, too little data, low confidence, skipped month).
 - [X] Synthetic data generator + `make seed`: personas covering AC1 (the 100k/120k/80k/110k/90k/300k series), AC2 (no emergency fund), AC5 (negative surplus), AC6 (2 months and 4 months of data).
 
@@ -59,7 +59,7 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [X] AC4 edge: skipped month flagged when balance would drop below 100,000 HUF.
 - [ ] AC5 edge: negative median → no plan + message.
 - [X] AC6 edge: 2 months → no estimate; 4 months → low confidence.
-- [ ] AC7 regression-style: accept twice → one set of orders; reject → none.
+- [X] AC7 regression-style: accept twice → one set of orders; reject → none.
 - [ ] AC8 invalid + unauthorised: 422 cases, 403 case.
 - [X] Hypothesis property: balance never below mandate minimum for any transaction sequence.
 - [ ] One Playwright e2e of the main workflow (questionnaire → plan → time machine → accept).
