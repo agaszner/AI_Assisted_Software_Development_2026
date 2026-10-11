@@ -1,5 +1,5 @@
 # 0003. Frontend tech stack and dependencies
-Date: 2026-10-10 · Status: proposed
+Date: 2026-10-10 · Status: accepted
 
 ## Context
 AGENTS.md section 3 fixes React + TypeScript (strict) + Vite, Tailwind CSS, TanStack Query and
@@ -7,7 +7,7 @@ Recharts. ADR-0001 deferred the frontend dependencies to the frontend plan. This
 frontend dependency so none is added silently.
 
 ## Decision
-- Node 22 or newer, **npm** with a committed `frontend/package-lock.json`.
+- Node 22.22.2+ or 24.15+ (jsdom needs it), **npm** with a committed `frontend/package-lock.json`.
 - Runtime: **react** and **react-dom** 19, **react-router** 8 (one URL per screen: back button,
   reload and Playwright deep links work), **@tanstack/react-query** 5 (server state, cache
   invalidation after accept / pause), **recharts** 3 (spending analysis and time machine charts),
@@ -36,5 +36,5 @@ frontend dependency so none is added silently.
 ## Consequences
 - The Vite dev server proxies `/api` to `localhost:8000`, so session and CSRF cookies are
   same-origin. The port is fixed at 5173 because `CSRF_TRUSTED_ORIGINS` names it.
-- `make setup` needs Node 22 and downloads Chromium for Playwright.
+- `make setup` needs Node 22.22.2+ and downloads Chromium for Playwright.
 - AGENTS.md section 3 lists React Router.
