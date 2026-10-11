@@ -15,3 +15,8 @@ def add_months(month: date, n: int) -> date:
 def months_between(start: date, end: date) -> int:
     """Whole calendar months from start's month to end's month (Oct → Aug next year = 10)."""
     return (end.year - start.year) * 12 + end.month - start.month
+
+
+def next_transfer_on(today: date) -> date:
+    """Recurring orders run on the 1st, so the next transfer is the first of next month."""
+    return add_months(month_of(today), 1)

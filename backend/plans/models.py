@@ -91,6 +91,14 @@ class Plan(models.Model):
     months_of_data = models.PositiveSmallIntegerField()
     confidence = models.CharField(max_length=10, choices=[(c.value, c.value) for c in Confidence])
     created_at = models.DateTimeField()
+    revises = models.ForeignKey(
+        "self",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="revisions",
+        help_text="The accepted plan this proposal would replace when signed (ADR-0004).",
+    )
 
     @property
     def per_transfer_approval(self) -> bool:
@@ -184,6 +192,7 @@ class LogEntry(models.Model):
     message = models.TextField()
     mandate_version = models.PositiveIntegerField(null=True, blank=True)
     clause = models.PositiveSmallIntegerField(null=True, blank=True)
+    amount = models.BigIntegerField(null=True, blank=True, help_text="Amount at the time, if any.")
     created_at = models.DateTimeField()
 
     class Meta:

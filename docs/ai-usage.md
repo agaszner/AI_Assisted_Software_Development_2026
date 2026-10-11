@@ -93,3 +93,16 @@ How AI tools are used to **develop** SaverAI. The running application contains n
   (735,000 HUF, 2 skipped months over 12 months) are an illustrative 12-month scenario. Seed persona anna
   has only 6 months of data, for which the engine gives 441,000 HUF and no skipped month. Order IDs in
   idempotency keys are illustrative. The sticky summary panel is annotated in the file, not prototyped.
+
+### Case 4 — Signing needs the password: accept tests updated 
+- Phase: implementation
+- Tool and model: Claude Code, Claude Opus 5.5 (frontend Figma plan, Task 4)
+- Problem: Figma 07b confirms the mandate with the customer's password; the accept endpoint took no body.
+- Context given and key instruction: the author chose "server checks the password" over a plain confirm dialog.
+- Essence of the AI suggestion: `AcceptIn {password}`, ownership check first (AC8), then `check_password`;
+  403 `Incorrect password.` creates nothing (ADR-0004).
+- Decision: accepted. Consequence: the API tests that accept a plan (`tests/api/test_plans_api.py`,
+  `test_frontend_endpoints.py`, `test_plan_details_api.py`) now send `{"password": "pw"}`. Their
+  assertions are unchanged; the request contract changed, the tests were not loosened.
+- Verification: `tests/api/test_signing_api.py`, full `make check`.
+- Limitations of this verification: no rate limiting on wrong passwords (demo scope).

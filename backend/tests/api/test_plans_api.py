@@ -20,6 +20,7 @@ QUESTIONNAIRE: dict[str, Any] = {
     "existing_emergency_fund": 750_000,
     "planned_expenses": [],
 }
+SIGN = {"password": "pw"}  # create_customer's password (ADR-0004)
 
 
 @pytest.fixture(autouse=True)
@@ -62,8 +63,8 @@ def test_main_flow_questionnaire_to_accepted_plan(client: Client) -> None:
     assert len(machine["months"]) == 6
     assert machine["total_saved"] == 6 * 73_500
 
-    assert post(client, f"/api/plans/{plan_id}/accept").json()["status"] == "accepted"
-    assert post(client, f"/api/plans/{plan_id}/accept").status_code == 200
+    assert post(client, f"/api/plans/{plan_id}/accept", SIGN).json()["status"] == "accepted"
+    assert post(client, f"/api/plans/{plan_id}/accept", SIGN).status_code == 200
     assert RecurringOrder.objects.count() == 1
     assert client.get("/api/plans/active").json()["id"] == plan_id
     assert post(client, f"/api/plans/{plan_id}/pause").json()["status"] == "paused"
@@ -108,7 +109,7 @@ def test_ac6_low_confidence_transfer_is_approved_through_api(
     login_as(client, "dani", [50_000, 60_000, 55_000, 65_000])
     plan = propose(client)["plan"]
     assert (plan["confidence"], plan["per_transfer_approval"]) == ("low", True)
-    post(client, f"/api/plans/{plan['id']}/accept")
+    post(client, f"/api/plans/{plan['id']}/accept", SIGN)
     run_monthly_orders(clock)
     [pending] = client.get("/api/executions").json()
     assert (pending["status"], pending["clause"]) == ("awaiting_approval", 3)
@@ -171,7 +172,7 @@ def test_ac8_other_customer_cannot_view_or_accept_plan(client: Client) -> None:
     client.logout()
     login_as(client, "bob", AC1_SERIES)
     assert client.get(f"/api/plans/{plan_id}").status_code == 403
-    assert post(client, f"/api/plans/{plan_id}/accept").status_code == 403
+    assert post(client, f"/api/plans/{plan_id}/accept", SIGN).status_code == 403
     assert client.get(f"/api/plans/{plan_id}/time-machine").status_code == 403
     assert patch(client, f"/api/plans/{plan_id}", {"monthly_amount": 1_000}).status_code == 403
     assert client.get(f"/api/plans/{plan_id + 999}").status_code == 404
@@ -182,7 +183,7 @@ def test_accepting_a_rejected_plan_is_a_conflict(client: Client) -> None:
     login_as(client, "anna", AC1_SERIES)
     plan_id = propose(client)["plan"]["id"]
     assert post(client, f"/api/plans/{plan_id}/reject").json()["status"] == "rejected"
-    assert post(client, f"/api/plans/{plan_id}/accept").status_code == 409
+    assert post(client, f"/api/plans/{plan_id}/accept", SIGN).status_code == 409
     assert RecurringOrder.objects.count() == 0
 
 

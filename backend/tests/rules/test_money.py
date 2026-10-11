@@ -3,8 +3,8 @@ from datetime import date
 import pytest
 
 from rules.defaults import DEFAULTS
-from rules.money import ceil_div, median, percent_of
-from rules.months import add_months, month_of, months_between
+from rules.money import ceil_div, median, middle_values, percent_of, progress_percent
+from rules.months import add_months, month_of, months_between, next_transfer_on
 
 
 def test_percent_of_rounds_down_to_whole_forint() -> None:
@@ -45,3 +45,19 @@ def test_defaults_match_specification() -> None:
     assert DEFAULTS.liquid_horizon_months == 12
     assert DEFAULTS.min_balance == 100_000
     assert DEFAULTS.backtest_months == 12
+
+
+def test_middle_values_for_odd_and_even_counts() -> None:
+    assert middle_values([300_000, 80_000, 100_000, 120_000, 90_000, 110_000]) == (100_000, 110_000)
+    assert middle_values([3, 1, 2]) == (2,)
+
+
+def test_progress_percent_rounds_down_and_caps_at_100() -> None:
+    assert progress_percent(720_000, 750_000) == 96
+    assert progress_percent(0, 300_000) == 0
+    assert progress_percent(900_000, 750_000) == 100
+
+
+def test_next_transfer_is_the_first_of_next_month() -> None:
+    assert next_transfer_on(date(2026, 10, 8)) == date(2026, 11, 1)
+    assert next_transfer_on(date(2026, 12, 31)) == date(2027, 1, 1)

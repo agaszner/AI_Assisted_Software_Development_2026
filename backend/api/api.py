@@ -27,4 +27,7 @@ def conflict(request: HttpRequest, exc: PlanConflict) -> HttpResponse:
 
 @api.exception_handler(InvalidInput)
 def invalid_input(request: HttpRequest, exc: InvalidInput) -> HttpResponse:
-    return api.create_response(request, {"detail": str(exc)}, status=422)
+    body = {"detail": str(exc)}
+    if exc.field is not None:
+        body["field"] = exc.field
+    return api.create_response(request, body, status=422)

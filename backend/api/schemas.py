@@ -2,7 +2,7 @@
 are rejected with 422 (golden rule 3, AC8). Past-date checks need the Clock, so they live in
 plans.services.submit_questionnaire."""
 
-from datetime import date
+from datetime import date, datetime
 from typing import Annotated
 
 from ninja import Schema
@@ -47,6 +47,9 @@ class AnalysisOut(Schema):
     median_surplus: int | None
     median_expenses: int
     monthly_amount: int | None
+    share_percent: int
+    median_explanation: str | None
+    explanations: list[str]  # no-surplus (AC5) or too-little-data (AC6) message, else empty
     months: list[MonthOut]
 
 
@@ -58,20 +61,36 @@ class ProductOut(Schema):
 
 
 class PlanItemOut(Schema):
+    position: int
     kind: str
     label: str
     product: ProductOut
     monthly_amount: int
     target_amount: int | None
+    due_on: date | None  # planned expenses only
+    saved_amount: int
+    progress_percent: int | None  # None when the item has no target
 
 
 class PlanOut(Schema):
     id: int
     status: str
+    revises: int | None  # the accepted plan this one would replace (ADR-0004)
+    pending_revision: int | None  # a proposed revision of this plan waiting for signature
+    created_on: date
     monthly_amount: int
     proposed_amount: int
+    median_surplus: int | None
+    months_of_data: int
+    share_percent: int
+    risk_score: int
+    min_balance: int
     confidence: str
     per_transfer_approval: bool
+    next_transfer_on: date
+    mandate_version: int | None
+    signed_on: date | None
+    saved_total: int
     items: list[PlanItemOut]
     explanations: list[str]
 
@@ -94,6 +113,8 @@ class BacktestMonthOut(Schema):
 
 class TimeMachineOut(Schema):
     total_saved: int
+    months_replayed: int
+    transfers_made: int
     skipped_months: list[date]
     months: list[BacktestMonthOut]
 
@@ -106,3 +127,56 @@ class ExecutionOut(Schema):
     mandate_version: int
     clause: int
     reason: str
+
+
+class TransactionOut(Schema):
+    id: int
+    booked_on: date
+    amount: int
+    description: str
+    own_transfer: bool
+
+
+class AccountOut(Schema):
+    today: date  # the server's Clock (honours SAVERAI_FIXED_DATE); the UI never reads its own clock
+    name: str
+    balance: int
+    min_balance: int
+    transactions: list[TransactionOut]
+
+
+class RulesOut(Schema):
+    lines: list[str]
+
+
+class ClauseOut(Schema):
+    number: int
+    text: str
+
+
+class MandateOut(Schema):
+    status: str  # "unsigned" (plan only proposed), "active" or "paused"
+    version: int  # unsigned: the version that accepting will sign
+    signed_at: datetime | None
+    max_monthly_amount: int
+    min_balance: int
+    per_transfer_approval: bool
+    products: list[ProductOut]
+    clauses: list[ClauseOut]
+
+
+class AcceptIn(Schema):
+    password: str = Field(min_length=1, max_length=128)
+
+
+class ActivityOut(Schema):
+    key: str
+    on: date
+    title: str
+    amount: int | None
+    status: str
+    mandate_version: int | None
+    clause: str | None
+    idempotency_key: str | None
+    logged_at: datetime | None
+    execution_id: int | None

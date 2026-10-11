@@ -6,7 +6,7 @@ for how AI tools were used during development.
 
 ## Requirements
 - Python 3.12 and [uv](https://docs.astral.sh/uv/)
-- Node.js 22 or newer (npm)
+- Node.js 22.22.2+ or 24.15+ (npm)
 
 ## Setup and run
     make setup      # backend + frontend deps, Playwright Chromium, .env from .env.example
@@ -28,7 +28,10 @@ for how AI tools were used during development.
 ## API
 Interactive docs at http://localhost:8000/api/docs after `make dev`. Log in with
 `POST /api/auth/login`; customer endpoints: questionnaire, analysis, plans (propose, review,
-edit, accept, reject, pause, time machine), executions (list, approve).
+edit, accept with `{"password": ...}`, reject, pause, time machine, revise: new amount for the
+active plan, signed as the next mandate version), executions (list, approve), account (today, balance,
+minimum balance, recent transactions), rules (plan rules in words), plan mandate (terms and
+clauses), activity (execution log: scheduled transfers, executions, plan events).
 
 ## Run with Docker
     make setup                  # only to create .env (or: cp .env.example .env)

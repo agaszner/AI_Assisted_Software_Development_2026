@@ -20,18 +20,20 @@ Dependency direction: `api` → `plans` / `banking` → `rules`. `banking` never
 | `banking.Product` | Catalogue: risk 1–5, minimum horizon, liquid, active | check risk 1–5, unique code |
 | `plans.RuleConfig` | Rule parameters, singleton, defaults from `rules/defaults.py` | pk = 1 |
 | `plans.QuestionnaireAnswer` / `ExpenseAnswer` | Fixed questionnaire answers and planned expenses | — |
-| `plans.Plan` | Proposal snapshot: amount, medians, confidence, status proposed/accepted/rejected/paused | — |
+| `plans.Plan` | Proposal snapshot: amount, medians, confidence, status proposed/accepted/rejected/paused; nullable `revises` = the accepted plan a proposal would replace (migration 0002, ADR-0004) | — |
 | `plans.PlanItem` | Ordered allocation lines with product | unique (plan, position) |
 | `plans.Mandate` | Signed limits, versioned per customer | unique (customer, version), OneToOne plan |
 | `plans.RecurringOrder` | One per accepted plan item | OneToOne plan item (AC7) |
 | `plans.Execution` | One monthly run of one order, with mandate version and clause | unique idempotency key (AC7) |
-| `plans.LogEntry` | Audit log; execution entries carry mandate version and clause | — |
+| `plans.LogEntry` | Audit log; execution entries carry mandate version and clause; nullable `amount` = amount at the time (migration 0003) | — |
 
 All money fields are `BigIntegerField` (whole forints). Timestamps come from the injected clock.
 
 ## Main flow
 questionnaire → `propose_plan` (rule engine) → plan review + time machine → accept (mandate vN,
 recurring orders) → `manage.py run_orders` each month → `check_action` → execution + log entry.
+`GET /api/activity` merges scheduled transfers (next period of each active order), executions and
+plan events (`plans/activity.py`).
 
 ## UI design
 Figma file: https://www.figma.com/design/QUT5rnXj1U6BYjty7YH5uS (responsive web: 1440 px desktop frames,

@@ -109,6 +109,7 @@ def execute_order(
             plan=mandate.plan,
             mandate_version=decision.mandate_version,
             clause=decision.clause,
+            amount=order.monthly_amount,
         )
     return execution
 
