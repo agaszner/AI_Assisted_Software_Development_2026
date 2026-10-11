@@ -1,6 +1,7 @@
 import { describe, expect, test } from "vitest";
 import {
   displayName,
+  formatCompact,
   formatDay,
   formatHuf,
   formatMonth,
@@ -58,4 +59,10 @@ describe("parseHuf", () => {
   ])("rejects %j", (text) => {
     expect(parseHuf(text)).toBeNull();
   });
+});
+
+test("formatCompact labels chart axes", () => {
+  expect(formatCompact(100_000)).toBe("100k");
+  expect(formatCompact(750_000)).toBe("750k");
+  expect(formatCompact(0)).toBe("0");
 });

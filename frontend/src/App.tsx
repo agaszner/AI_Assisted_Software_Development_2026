@@ -4,8 +4,11 @@ import { keys, useLogout, useMe } from "./api/hooks";
 import { makeQueryClient } from "./api/queryClient";
 import { AppShell } from "./components/AppShell";
 import { ErrorMessage } from "./components/ErrorMessage";
+import { AnalysisScreen } from "./screens/analysis/AnalysisScreen";
 import { HomeScreen } from "./screens/home/HomeScreen";
 import { LoginScreen } from "./screens/login/LoginScreen";
+import { PlanReviewScreen } from "./screens/plan-review/PlanReviewScreen";
+import { QuestionnaireScreen } from "./screens/questionnaire/QuestionnaireScreen";
 
 /** Any 401 (expired session) clears the user, so RequireLogin redirects to /login. */
 export function createQueryClient(): QueryClient {
@@ -48,6 +51,9 @@ export function App() {
           <Route path="/activity" element={<h1 className="text-h1">Activity</h1>} />
         </Route>
         {/* Flow routes (Tasks 11–16) go here: they render FlowLayout themselves. */}
+        <Route path="/questionnaire" element={<QuestionnaireScreen />} />
+        <Route path="/plans/:planId/analysis" element={<AnalysisScreen />} />
+        <Route path="/plans/:planId" element={<PlanReviewScreen />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

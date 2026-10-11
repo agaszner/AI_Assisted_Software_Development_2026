@@ -1,7 +1,18 @@
 /** TanStack Query hooks: one per endpoint. Screens never call apiFetch directly. */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ApiError, apiFetch } from "./client";
-import type { AccountOut, AnalysisOut, LoginIn, Me, PlanOut, RulesOut } from "./types";
+import type {
+  AccountOut,
+  AnalysisOut,
+  IdOut,
+  LoginIn,
+  Me,
+  PlanOut,
+  ProposalOut,
+  QuestionnaireIn,
+  RulesOut,
+  TimeMachineOut,
+} from "./types";
 
 export const keys = {
   me: ["me"],
@@ -73,5 +84,64 @@ export function useActivePlan() {
   return useQuery({
     queryKey: keys.activePlan,
     queryFn: () => orNull(apiFetch<PlanOut>("/api/plans/active"), 404),
+  });
+}
+
+/** Store the answers, then ask the rule engine for a plan (AC5, AC6 outcomes included). */
+export function useSubmitAnswers() {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: async (answers: QuestionnaireIn) => {
+      await apiFetch<IdOut>("/api/questionnaire", { method: "POST", body: answers });
+      return apiFetch<ProposalOut>("/api/plans", { method: "POST" });
+    },
+    onSuccess: async () => {
+      await client.invalidateQueries({ queryKey: keys.plans });
+      await client.invalidateQueries({ queryKey: keys.analysis });
+    },
+  });
+}
+
+export function usePlan(planId: number) {
+  return useQuery({
+    queryKey: keys.plan(planId),
+    queryFn: () => apiFetch<PlanOut>(`/api/plans/${planId}`),
+  });
+}
+
+export function useTimeMachine(planId: number) {
+  return useQuery({
+    queryKey: keys.timeMachine(planId),
+    queryFn: () => apiFetch<TimeMachineOut>(`/api/plans/${planId}/time-machine`),
+  });
+}
+
+/** Lower the amount of a proposed plan (nothing runs until it is accepted). */
+export function useEditPlan(planId: number) {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: (monthlyAmount: number) =>
+      apiFetch<PlanOut>(`/api/plans/${planId}`, {
+        method: "PATCH",
+        body: { monthly_amount: monthlyAmount },
+      }),
+    onSuccess: async (updated) => {
+      client.setQueryData(keys.plan(planId), updated);
+      await client.invalidateQueries({ queryKey: keys.timeMachine(planId) });
+      await client.invalidateQueries({ queryKey: keys.mandate(planId) });
+    },
+  });
+}
+
+/** Reject a proposed plan or pause an active one; refreshes every plan query and the log. */
+export function usePlanAction(action: "reject" | "pause") {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: (planId: number) =>
+      apiFetch<PlanOut>(`/api/plans/${planId}/${action}`, { method: "POST" }),
+    onSuccess: async () => {
+      await client.invalidateQueries({ queryKey: keys.plans });
+      await client.invalidateQueries({ queryKey: keys.activity });
+    },
   });
 }

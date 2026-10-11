@@ -50,7 +50,7 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [X] Theme tokens in `src/theme/` (from Figma variables if available).
 - [X] Shared components: Button, TransactionRow, SideNav (44 px touch targets, accessible labels).
 - [ ] Screens: login, home, questionnaire, plan review (with confidence level), time machine (chart with skipped months), mandate, active plan (pause).
-- [ ] Empty/explanation states: no surplus (AC5), too little data asks for expected monthly savings (AC6).
+- [X] Empty/explanation states: no surplus (AC5), too little data asks for expected monthly savings (AC6).
 
 ### Tests (names `test_acN_<behaviour>`)
 - [X] AC1 normal: `test_ac1_median_surplus_gives_73500`.

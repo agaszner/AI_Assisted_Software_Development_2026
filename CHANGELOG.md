@@ -39,6 +39,10 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Frontend layouts from Figma: SideNav and AppShell (drawer below 1024 px), FlowHeader / FlowLayout (Step N of 4, Back, Save & exit), sticky SummaryPanel (bottom bar below 1024 px) and an accessible Modal (focus trap, Esc).
 - Frontend login screen (Figma 01), protected routes and the sidebar layout; an expired session (401) returns the customer to login.
 - Home screen (Figma 02): balance, minimum balance and next transfer, savings plan progress from the API, recent transactions, rule summary from RuleConfig.
+- Questionnaire (Figma 03): fixed questions, risk radio group, planned expenses, amounts parsed as whole forints before any request (AC8).
+- No-surplus (Figma 09) and too-little-data (Figma 10) states with the backend explanation; server validation errors shown at the field (AC5, AC6, AC8).
+- Spending analysis (Figma 04): median, suggested amount and months analysed, surplus chart with the median line, the median working and a month table (AC1).
+- Plan review (Figma 05, 05b): explanation and plan facts, priority-ordered items, time machine summary, lower-the-amount and reject, sticky summary panel with the confidence level (AC1, AC2, AC6–AC8).
 
 ### Changed
 - Frontend target is a responsive web UI instead of a mobile UI: left sidebar, focused plan flow, sticky summary panel, password-confirmation modal, execution log table; new Figma file (AI usage case 3).

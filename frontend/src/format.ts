@@ -61,3 +61,10 @@ export function parseHuf(text: string): Huf | null {
   const value = Number(digits);
   return Number.isSafeInteger(value) ? value : null;
 }
+
+const compact = new Intl.NumberFormat("en-US", { notation: "compact", maximumFractionDigits: 0 });
+
+/** Chart axis ticks: 100000 → "100k" (Figma 04, 06). */
+export function formatCompact(amount: Huf): string {
+  return compact.format(amount).toLowerCase();
+}
