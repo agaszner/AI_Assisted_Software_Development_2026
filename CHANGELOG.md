@@ -29,6 +29,18 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Plan services: questionnaire with past-date check (AC8), proposal (AC5, AC6), acceptance with versioned mandate and exactly-once recurring orders, rejection (AC7), amount edit, pause, ownership check (AC8).
 - React + TypeScript + Vite frontend skeleton with Vitest, ESLint, Prettier; `make dev` runs backend and frontend, new `make test-fe` and `make e2e` (ADR-0003).
 - `make docs-check` also verifies frontend test references in `docs/traceability.md`.
+- API: `GET /api/account` (server date, balance, minimum balance, 5 newest transactions), `GET /api/rules` (plan rules filled from `RuleConfig`) and `GET /api/plans/{id}/mandate` (mandate terms and clauses, preview before acceptance); another customer's mandate returns 403 (AC8).
+- API details for the web UI: plan date, risk score, share, minimum balance, next transfer, mandate version and saved total; per-item due date and progress; spending-analysis median working and no-surplus / too-little-data explanations; time machine transfer counts (AC4–AC6).
+- Questionnaire errors name the field (`{"detail", "field"}`), e.g. a past expense date (AC8).
+- Plan revision: `POST /api/plans/{id}/revise` proposes a new amount for the active plan; signing it pauses the old plan and signs the next mandate version (ADR-0004, migration 0002).
+- API: `GET /api/activity`, the execution log with scheduled transfers, audit fields (mandate version, clause, idempotency key) and plan events; log entries store the amount (migration 0003) (AC6, AC7).
+- Frontend API client: typed mirror of the API schemas, CSRF token read on every request, readable messages for 403 / 409 / 422 errors and the field a 422 names.
+- Frontend design tokens copied from the Figma variables (colours, spacing, radii, Focus/Ring, Elevation/Panel, text styles, Inter) and base components: Icon, Button, Badge, TextField, Checkbox, ErrorMessage, Card, StatTile, Kbd, ProgressBar (44 px targets, labelled controls, visible focus).
+- Frontend layouts from Figma: SideNav and AppShell (drawer below 1024 px), FlowHeader / FlowLayout (Step N of 4, Back, Save & exit), sticky SummaryPanel (bottom bar below 1024 px) and an accessible Modal (focus trap, Esc).
+- Frontend login screen (Figma 01), protected routes and the sidebar layout; an expired session (401) returns the customer to login.
+- Home screen (Figma 02): balance, minimum balance and next transfer, savings plan progress from the API, recent transactions, rule summary from RuleConfig.
 
 ### Changed
 - Frontend target is a responsive web UI instead of a mobile UI: left sidebar, focused plan flow, sticky summary panel, password-confirmation modal, execution log table; new Figma file (AI usage case 3).
+- Signing a mandate (`POST /api/plans/{id}/accept`) requires the customer's password; a wrong password signs nothing (AC7, ADR-0004).
+

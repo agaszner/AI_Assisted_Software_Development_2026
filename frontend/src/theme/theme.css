@@ -1,1 +1,84 @@
 @import "tailwindcss";
+
+/*
+ * Design tokens from the Figma file QUT5rnXj1U6BYjty7YH5uS (local variables `color`, `space`,
+ * text styles, effect styles Focus/Ring and Elevation/Panel). Update values here only, from Figma.
+ * `--color-*: initial` removes Tailwind's default palette, so only these colours exist.
+ * Spacing: Tailwind's 4 px step equals Figma space-N (p-4 = space-4 = 16 px).
+ */
+@theme {
+  --color-*: initial;
+  --color-bg: #f5f7f8;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f2f4f7;
+  --color-text: #101828;
+  --color-text-muted: #667085;
+  --color-border: #e4e7ec;
+  --color-border-strong: #98a2b3;
+  --color-primary: #0f766e;
+  --color-primary-hover: #115e59;
+  --color-primary-subtle: #e6f4f1;
+  --color-on-primary: #ffffff;
+  --color-danger: #b42318;
+  --color-danger-bg: #fef3f2;
+  --color-success: #067647;
+  --color-success-bg: #ecfdf3;
+  --color-warning: #b54708;
+  --color-warning-bg: #fffaeb;
+  --color-info: #175cd3;
+  --color-info-bg: #eff8ff;
+  --color-focus-ring: #1d4ed8;
+  --color-tooltip-bg: #101828;
+  --color-chart-saved: #14b8a6;
+  --color-chart-income: #cbd5e1;
+  --color-chart-skipped: #f79009;
+  --color-chart-grid: #eaecf0;
+
+  --spacing: 4px;
+  --spacing-touch: 44px; /* var(--target-min) */
+  --spacing-sidebar: 248px;
+  --spacing-panel: 360px; /* sticky summary panel */
+  --spacing-content: 1040px;
+  --spacing-narrow: 720px;
+  /* max-w-* reads the container namespace: same widths as max-w-content / max-w-narrow. */
+  --container-content: 1040px;
+  --container-narrow: 720px;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-full: 999px;
+
+  --shadow-panel: 0 4px 16px 0 rgb(16 24 40 / 0.06); /* Elevation/Panel */
+  --shadow-focus:
+    0 0 0 2px var(--color-surface), 0 0 0 4px var(--color-focus-ring); /* Focus/Ring */
+
+  --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
+  --text-h1: 28px;
+  --text-h1--line-height: 36px;
+  --text-h1--font-weight: 600;
+  --text-h2: 20px;
+  --text-h2--line-height: 28px;
+  --text-h2--font-weight: 600;
+  --text-h3: 16px;
+  --text-h3--line-height: 24px;
+  --text-h3--font-weight: 600;
+  --text-body: 14px;
+  --text-body--line-height: 20px;
+  --text-caption: 12px;
+  --text-caption--line-height: 16px;
+  --text-caption--font-weight: 500;
+  --text-number: 32px;
+  --text-number--line-height: 40px;
+  --text-number--font-weight: 700;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+}
