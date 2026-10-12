@@ -3,9 +3,12 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { ApiError, apiFetch } from "./client";
 import type {
   AccountOut,
+  ActivityOut,
   AnalysisOut,
+  ExecutionOut,
   IdOut,
   LoginIn,
+  MandateOut,
   Me,
   PlanOut,
   ProposalOut,
@@ -139,6 +142,64 @@ export function usePlanAction(action: "reject" | "pause") {
   return useMutation({
     mutationFn: (planId: number) =>
       apiFetch<PlanOut>(`/api/plans/${planId}/${action}`, { method: "POST" }),
+    onSuccess: async () => {
+      await client.invalidateQueries({ queryKey: keys.plans });
+      await client.invalidateQueries({ queryKey: keys.activity });
+    },
+  });
+}
+
+export function useMandate(planId: number) {
+  return useQuery({
+    queryKey: keys.mandate(planId),
+    queryFn: () => apiFetch<MandateOut>(`/api/plans/${planId}/mandate`),
+  });
+}
+
+/** Sign the mandate with the customer's password (ADR-0004). Accepting twice creates nothing new (AC7). */
+export function useAcceptPlan(planId: number) {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: (password: string) =>
+      apiFetch<PlanOut>(`/api/plans/${planId}/accept`, { method: "POST", body: { password } }),
+    onSuccess: async () => {
+      await client.invalidateQueries({ queryKey: keys.plans });
+      await client.invalidateQueries({ queryKey: keys.activity });
+      await client.invalidateQueries({ queryKey: keys.account });
+    },
+  });
+}
+
+export function useActivity() {
+  return useQuery({
+    queryKey: keys.activity,
+    queryFn: () => apiFetch<ActivityOut[]>("/api/activity"),
+  });
+}
+
+/** Approve one transfer of a low-confidence plan (AC6). */
+export function useApproveExecution() {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: (executionId: number) =>
+      apiFetch<ExecutionOut>(`/api/executions/${executionId}/approve`, { method: "POST" }),
+    onSuccess: async () => {
+      await client.invalidateQueries({ queryKey: keys.activity });
+      await client.invalidateQueries({ queryKey: keys.plans });
+      await client.invalidateQueries({ queryKey: keys.account });
+    },
+  });
+}
+
+/** Propose a new amount for the active plan; nothing changes until it is signed (ADR-0004). */
+export function useRevisePlan(planId: number) {
+  const client = useQueryClient();
+  return useMutation({
+    mutationFn: (monthlyAmount: number) =>
+      apiFetch<PlanOut>(`/api/plans/${planId}/revise`, {
+        method: "POST",
+        body: { monthly_amount: monthlyAmount },
+      }),
     onSuccess: async () => {
       await client.invalidateQueries({ queryKey: keys.plans });
       await client.invalidateQueries({ queryKey: keys.activity });
