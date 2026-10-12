@@ -6,6 +6,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- Playwright e2e: AC5 no-surplus path (bence), 375 px no-horizontal-scroll check (dani) and 44 px touch-target checks on every screen of the main flow (AC5, AC7).
+- Manual UI checks for mandate signing, active plan pause, time machine skipped months and responsive layout; README test/e2e/defect instructions; architecture frontend and test section; AI usage Case 5 draft (testing phase); AC1 defect evidence in traceability.
+- Deliberate defect demo in `backend/tests/defects/`: AC1 surplus with mean instead of median, faulty vs fixed versions, saved test-run outputs and README (AC1).
+- Playwright e2e of the main workflow (login → questionnaire → plan review → time machine → mandate signing → active plan) on a freshly seeded database; `make e2e` (AC1, AC2, AC4, AC7).
+- Mandate screen (Figma 07) with terms and clauses from the API, consent, and password confirmation before signing (Figma 07b, ADR-0004); one request per confirmation (AC7).
+- Active plan (Figma 08) and Activity: stat tiles, recurring orders, execution log with audit details (mandate version, clause, idempotency key), transfer approval (AC6), pause with confirmation, change amount as a revision signed as the next mandate version (ADR-0004).
 - Time machine screen at `/plans/:planId/time-machine` (Figma 06, chosen dual implementation from `dual/claude`): stat tiles, saved chart with legend and skipped months, month-by-month table behind "See month by month", backend skip notes, "Continue to mandate" for proposed plans (AC4).
 - Django 5 + Django Ninja backend skeleton with session login, `customer` / `admin` roles and a Makefile (ADR-0001).
 - `make docs-check`: AC ↔ traceability, referenced tests exist, changelog touched (AGENTS.md 8.6).

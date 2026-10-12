@@ -12,7 +12,7 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 ## M2 — First working version (deadline: end of week 10)
 
 ### Project skeleton
-- [ ] `Makefile` with targets from AGENTS.md section 4 (`setup`, `migrate`, `seed`, `dev`, `test`, `test-fe`, `e2e`, `lint`, `docs-check`, `check`).
+- [X] `Makefile` with targets from AGENTS.md section 4 (`setup`, `migrate`, `seed`, `dev`, `test`, `test-fe`, `e2e`, `lint`, `docs-check`, `check`).
 - [X] `.env.example`; keep `.env` in `.gitignore`.
 - [X] Django 5 + Django Ninja project in `backend/` (`config/`, `core/`, `banking/`, `plans/`, `api/`).
 - [X] React + TypeScript (strict) + Vite + Tailwind in `frontend/`.
@@ -49,7 +49,7 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 ### Frontend (`frontend/src/screens/`)
 - [X] Theme tokens in `src/theme/` (from Figma variables if available).
 - [X] Shared components: Button, TransactionRow, SideNav (44 px touch targets, accessible labels).
-- [ ] Screens: login, home, questionnaire, plan review (with confidence level), time machine (chart with skipped months), mandate, active plan (pause).
+- [X] Screens: login, home, questionnaire, plan review (with confidence level), time machine (chart with skipped months), mandate, active plan (pause).
 - [X] Empty/explanation states: no surplus (AC5), too little data asks for expected monthly savings (AC6).
 
 ### Tests (names `test_acN_<behaviour>`)
@@ -62,12 +62,12 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [X] AC7 regression-style: accept twice → one set of orders; reject → none.
 - [X] AC8 invalid + unauthorised: 422 cases, 403 case.
 - [X] Hypothesis property: balance never below mandate minimum for any transaction sequence.
-- [ ] One Playwright e2e of the main workflow (questionnaire → plan → time machine → accept).
+- [X] One Playwright e2e of the main workflow (questionnaire → plan → time machine → accept).
 
 ### Documentation
-- [ ] `README.md`: setup, run, test commands, link to `docs/ai-usage.md`.
+- [X] `README.md`: setup, run, test commands, link to `docs/ai-usage.md`.
 - [X] `docs/traceability.md`: one row per AC, verification method, test path, status.
-- [ ] `docs/manual-checks.md`: reproducible steps for UI-only checks.
+- [X] `docs/manual-checks.md`: reproducible steps for UI-only checks.
 - [X] `docs/architecture.md`: components and data model.
 - [X] `CHANGELOG.md` (Keep a Changelog).
 - [X] `make docs-check` script (AC ↔ traceability, referenced tests exist, changelog touched).
@@ -77,8 +77,8 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 ## M3 — Final version (deadline: week 13)
 
 ### Defect detection (`backend/tests/defects/`)
-- [ ] Pick one defect (real, or a clearly labelled deliberate one, e.g. mean instead of median in AC1).
-- [ ] Keep faulty and fixed versions plus both test-run outputs. Explain defect and expected behaviour.
+- [X] Pick one defect (real, or a clearly labelled deliberate one, e.g. mean instead of median in AC1).
+- [X] Keep faulty and fixed versions plus both test-run outputs. Explain defect and expected behaviour.
 
 ### Dual implementation (AGENTS.md section 11)
 - [X] One shared prompt for the time machine screen (frontend plan Task 15, AC4), recorded in `docs/dual-implementation.md`.

@@ -43,6 +43,18 @@ clauses), activity (execution log: scheduled transfers, executions, plan events)
     make e2e        # Playwright end-to-end tests; RESETS the local database (flush, migrate, seed)
     make lint       # ruff + mypy, eslint + tsc + prettier
     make fmt        # auto-fix lint and formatting
-    make check      # run before every commit
+    make docs-check # traceability, referenced tests, changelog
+    make check      # lint + test + test-fe + docs-check; run before every commit
 
-Specification: `docs/specification.md`. Agent instructions: `AGENTS.md`.
+`make e2e` starts the servers if they are not running and **wipes the local database**
+(`backend/db.sqlite3`): it runs migrate, flush and seed before the tests. Run `make seed` again
+afterwards if you need a fresh demo state.
+
+Deliberate defect demo (AC1 mean instead of median, not collected by `make test`):
+
+    cd backend && uv run pytest tests/defects/check_ac1_mean_vs_median.py -v   # [faulty] fails, [fixed] passes
+
+See `backend/tests/defects/README.md`. Manual UI checks: `docs/manual-checks.md`.
+
+Specification: `docs/specification.md`. Traceability: `docs/traceability.md`. AI usage log:
+[`docs/ai-usage.md`](docs/ai-usage.md). Agent instructions: `AGENTS.md`.

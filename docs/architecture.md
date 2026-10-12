@@ -51,3 +51,12 @@ https://www.figma.com/design/BqX09Awt7irGNkgUDShfsa, is kept for reference (AI u
 - Customer-facing texts are copied from `backend/plans/explanations.py` and the validation messages in
   `backend/plans/services.py`. Breakpoints and keyboard behaviour are on the
   `Responsive & interaction notes` frame.
+
+## Frontend and tests
+React SPA in `frontend/` (ADR-0003): screens in `src/screens/<name>/`, shared UI in `src/components/`,
+tokens in `src/theme/`. Data flow: screen → hook (`src/api/hooks.ts`, TanStack Query) → `apiFetch`
+(`src/api/client.ts`) → `/api` (Vite proxy) → Django Ninja. The frontend computes no money, date or
+rule decision. Vitest tests stub `fetch`; Playwright (`frontend/e2e/`, `make e2e`) runs both servers
+on a freshly reset and seeded database (global setup: migrate, flush, seed). The deliberate AC1
+defect (mean instead of median) lives in `backend/tests/defects/` and is run explicitly, outside
+`make test`.

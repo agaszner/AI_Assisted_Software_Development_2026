@@ -58,7 +58,7 @@ How AI tools are used to **develop** SaverAI. The running application contains n
     the mandate version and clause logged (golden rule 6), and an ownership check returning 403 for
     another customer's plan instead of the 404 that `.get(customer=user)` would give (AC8).
 
-### Case 3 — UI target: mobile first rejected, responsive web chosen (DRAFT — author to verify)
+### Case 3 — UI target: mobile first rejected, responsive web chosen
 - Phase: design
 - Tool and model: Opus 5.5 the tool and model that suggested mobile first. The web redesign was
   made with Claude Opus 5.5 and the Figma MCP server.
