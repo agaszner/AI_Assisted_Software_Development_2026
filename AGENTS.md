@@ -207,7 +207,7 @@ Follow *Keep a Changelog*. Sections: Added, Changed, Fixed, Removed. Reference A
 
 ## 11. Dual implementation (homework requirement)
 
-One feature (default: the time machine in `rules/backtest.py`) is implemented twice with two different AI tools, on branches `dual/claude-code` and `dual/gemini`, from the same prompt and the same tests. Results and the comparison go in `docs/dual-implementation.md`. Only one version is merged; the other stays on its branch.
+One feature (the time machine screen, frontend plan Task 15, AC4) is implemented twice with two different AI tools, on branches `dual/claude` and `dual/gemini`, from the same prompt. Results and the comparison go in `docs/dual-implementation.md`. Only one version is merged; the other stays on its branch.
 
 ## 12. Do not
 
