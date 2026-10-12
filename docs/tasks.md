@@ -85,7 +85,7 @@ Sources: `docs/Homework_requirements_EN.pdf`, `docs/specification.md`, `AGENTS.m
 - [X] Branch `dual/claude`: implement with Claude Code (Sonnet 5.5).
 - [X] Branch `dual/gemini`: implement with Gemini / Antigravity (Gemini 3.8 Flash).
 - [X] `docs/dual-implementation.md`: test results, code differences, working-method comparison.
-- [ ] Merge the chosen branch (recommended `dual/claude`) with the accessible-name follow-up.
+- [X] Merge the chosen branch (`dual/claude`) with the accessible-name follow-up.
 
 ### Change request (AGENTS.md section 10, after instructor issues it)
 - [ ] Branch `change-request/<name>` from `v1.0-first-version`.

@@ -173,7 +173,7 @@ how heavy each run felt on the author's plan, not comparable costs.
 
 ## 7. Decision
 
-merge `dual/claude`, with a small follow-up commit before Task 18.
+**Merged `dual/claude` into `main`**, followed by the follow-up commit listed below (all items done, including the `<details>` table). After it, the plan's four tests pass on the merged screen and `make check` is green (166 backend, 79 frontend tests).
 
 Technical reasons:
 
@@ -186,13 +186,13 @@ Technical reasons:
 - The run took half the time and much less quota, and it stayed on the assigned branch without
   intervention.
 
-What to take from Gemini / the plan, in the follow-up commit:
+Taken from Gemini / the plan in the follow-up commit:
 
 - `aria-label="Totals"` on the stat-tile grid, table caption "Saved to date, month by month" and
   `aria-label="Skipped months"` on the list, so the plan's tests and the Task 18 e2e step pass.
-- Optionally put the table in `<details>` "See month by month", which is closer to Figma and is what
+- The table moved into `<details>` "See month by month", which is closer to Figma and is what
   the e2e step clicks.
-- Rename `TimeMachineView.test.tsx` to `TimeMachineScreen.test.tsx` and update `docs/traceability.md`.
+- `TimeMachineView.test.tsx` replaced by the plan's `TimeMachineScreen.test.tsx` (tests unchanged, plus one assertion for the "a month when it ran" caption from Claude's test); `docs/traceability.md` updated.
 - A single `ErrorMessage` (`machine.error ?? plan.error`) to avoid a duplicated error.
 
 `dual/gemini` stays on its branch, unmerged.

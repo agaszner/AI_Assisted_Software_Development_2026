@@ -11,6 +11,7 @@ import { SavedChart } from "../../components/SavedChart";
 import { StatTile } from "../../components/StatTile";
 import { formatHuf, formatMonth } from "../../format";
 
+const TABLE_TITLE = "Saved to date, month by month";
 const list = new Intl.ListFormat("en", { style: "long", type: "conjunction" });
 
 function Legend() {
@@ -53,7 +54,7 @@ function MonthRow({ m }: { m: BacktestMonthOut }) {
 function MonthTable({ months }: { months: BacktestMonthOut[] }) {
   return (
     <table className="w-full text-body">
-      <caption className="sr-only">Month by month replay of the plan</caption>
+      <caption className="sr-only">{TABLE_TITLE}</caption>
       <thead className="text-caption text-text-muted">
         <tr>
           <th scope="col" className="px-3 pb-2 text-left font-medium">
@@ -95,7 +96,7 @@ function SkippedMonths({ machine }: { machine: TimeMachineOut }) {
       {skipped.length === 0 ? (
         <p className="text-body text-text-muted">No transfer would have been skipped.</p>
       ) : (
-        <ul className="space-y-3">
+        <ul aria-label="Skipped months" className="space-y-3">
           {skipped.map((m) => (
             <li
               key={m.month}
@@ -128,11 +129,10 @@ export function TimeMachineScreen() {
             months of real transactions? This shows past behaviour only, not a forecast.
           </p>
         </header>
-        <ErrorMessage error={machine.error} />
-        <ErrorMessage error={plan.error} />
+        <ErrorMessage error={machine.error ?? plan.error} />
         {data ? (
           <>
-            <div className="grid gap-4 md:grid-cols-3">
+            <section aria-label="Totals" className="grid gap-4 md:grid-cols-3">
               <StatTile
                 label={`Saved over ${data.months_replayed} months`}
                 value={formatHuf(data.total_saved)}
@@ -156,19 +156,22 @@ export function TimeMachineScreen() {
                 value={String(data.skipped_months.length)}
                 caption={list.format(data.skipped_months.map(formatMonth)) || undefined}
               />
-            </div>
+            </section>
             <Card>
               <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-                <h2 className="text-h2">Saved to date, month by month</h2>
+                <h2 className="text-h2">{TABLE_TITLE}</h2>
                 <Legend />
               </div>
               <SavedChart months={data.months} />
               <p className="mt-4 text-caption text-text-muted">
                 Value labels appear on hover or keyboard focus, not on every bar.
               </p>
-            </Card>
-            <Card title="Month by month">
-              <MonthTable months={data.months} />
+              <details className="mt-4">
+                <summary className="flex min-h-touch cursor-pointer items-center text-body font-semibold text-primary">
+                  See month by month
+                </summary>
+                <MonthTable months={data.months} />
+              </details>
             </Card>
             <SkippedMonths machine={data} />
           </>
