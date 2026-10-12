@@ -1,0 +1,11 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.12, pytest-9.1.1, pluggy-1.6.0
+django: version: 5.2.18, settings: config.settings (from ini)
+rootdir: /Users/gaszneradam/Documents/BME/MSC/2_felev/ai_assisted_software/homework/AI_Assisted_Software_Development_2026/backend
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, django-4.14.0
+collected 2 items / 1 deselected / 1 selected
+
+tests/defects/check_ac1_mean_vs_median.py .                              [100%]
+
+======================= 1 passed, 1 deselected in 0.01s ========================

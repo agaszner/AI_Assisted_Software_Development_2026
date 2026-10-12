@@ -1,0 +1,28 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.12, pytest-9.1.1, pluggy-1.6.0
+django: version: 5.2.18, settings: config.settings (from ini)
+rootdir: /Users/gaszneradam/Documents/BME/MSC/2_felev/ai_assisted_software/homework/AI_Assisted_Software_Development_2026/backend
+configfile: pyproject.toml
+plugins: hypothesis-6.168.5, django-4.14.0
+collected 2 items / 1 deselected / 1 selected
+
+tests/defects/check_ac1_mean_vs_median.py F                              [100%]
+
+=================================== FAILURES ===================================
+_________________ test_ac1_median_surplus_gives_73500[faulty] __________________
+
+analyse = <function analyse_surplus at 0x109a5d1c0>
+
+    @pytest.mark.parametrize(
+        "analyse", [faulty.analyse_surplus, fixed.analyse_surplus], ids=["faulty", "fixed"]
+    )
+    def test_ac1_median_surplus_gives_73500(analyse: Callable[..., SurplusAnalysis]) -> None:
+        result = analyse(monthly_series(LAST_MONTH, AC1_SERIES), TODAY)
+>       assert result.median_surplus == 105_000
+E       assert 133333 == 105000
+E        +  where 133333 = SurplusAnalysis(months_of_data=6, flows=(MonthFlow(month=datetime.date(2026, 4, 1), income=350000, expenses=250000), M...ate(2026, 9, 1), income=550000, expenses=250000)), median_surplus=133333, median_expenses=250000, monthly_amount=93333).median_surplus
+
+tests/defects/check_ac1_mean_vs_median.py:24: AssertionError
+=========================== short test summary info ============================
+FAILED tests/defects/check_ac1_mean_vs_median.py::test_ac1_median_surplus_gives_73500[faulty]
+======================= 1 failed, 1 deselected in 0.04s ========================
