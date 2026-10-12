@@ -9,6 +9,7 @@ import { HomeScreen } from "./screens/home/HomeScreen";
 import { LoginScreen } from "./screens/login/LoginScreen";
 import { PlanReviewScreen } from "./screens/plan-review/PlanReviewScreen";
 import { QuestionnaireScreen } from "./screens/questionnaire/QuestionnaireScreen";
+import { TimeMachineScreen } from "./screens/time-machine/TimeMachineScreen";
 
 /** Any 401 (expired session) clears the user, so RequireLogin redirects to /login. */
 export function createQueryClient(): QueryClient {
@@ -54,6 +55,7 @@ export function App() {
         <Route path="/questionnaire" element={<QuestionnaireScreen />} />
         <Route path="/plans/:planId/analysis" element={<AnalysisScreen />} />
         <Route path="/plans/:planId" element={<PlanReviewScreen />} />
+        <Route path="/plans/:planId/time-machine" element={<TimeMachineScreen />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
