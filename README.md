@@ -35,7 +35,8 @@ clauses), activity (execution log: scheduled transfers, executions, plan events)
 
 ## Run with Docker
     make setup                  # only to create .env (or: cp .env.example .env)
-    docker compose up --build   # backend on http://localhost:8000, applies migrations on start
+    docker compose up --build   # backend on http://localhost:8000 (applies migrations), app on http://localhost:5173
+    docker compose exec backend uv run python manage.py seed   # demo users
 
 ## Quality
     make test       # pytest

@@ -10,7 +10,7 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
     // Same-origin API calls: the session and CSRF cookies just work.
-    proxy: { "/api": "http://localhost:8000" },
+    proxy: { "/api": process.env.API_URL ?? "http://localhost:8000" },
   },
   test: {
     environment: "jsdom",
