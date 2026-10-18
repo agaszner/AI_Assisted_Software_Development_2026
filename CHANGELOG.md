@@ -6,6 +6,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- `docs/project-state.md`: M2 first working version state report (workflow, setup, test results, development history, open items), linked from README.
 - Frontend `Dockerfile` and `frontend` service in `docker-compose.yml`: `docker compose up --build` now runs backend and app; Vite proxy target set by `API_URL`.
 - Playwright e2e: AC5 no-surplus path (bence), 375 px no-horizontal-scroll check (dani) and 44 px touch-target checks on every screen of the main flow (AC5, AC7).
 - Manual UI checks for mandate signing, active plan pause, time machine skipped months and responsive layout; README test/e2e/defect instructions; architecture frontend and test section; AI usage Case 5 draft (testing phase); AC1 defect evidence in traceability.

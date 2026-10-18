@@ -57,5 +57,6 @@ Deliberate defect demo (AC1 mean instead of median, not collected by `make test`
 
 See `backend/tests/defects/README.md`. Manual UI checks: `docs/manual-checks.md`.
 
+Project state (M2 first working version): [`docs/project-state.md`](docs/project-state.md).
 Specification: `docs/specification.md`. Traceability: `docs/traceability.md`. AI usage log:
 [`docs/ai-usage.md`](docs/ai-usage.md). Agent instructions: `AGENTS.md`.
